@@ -92,4 +92,13 @@ class SafeDbProvider {
       whereArgs: [item.id],
     );
   }
+
+  Future<int> deletePassword(int id) async {
+    await ready;
+    return db.delete(
+      'Details',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }
