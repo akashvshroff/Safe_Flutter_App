@@ -59,6 +59,16 @@ class SafeDbProvider {
     return db.update('Master', masterMap, where: 'id = ?', whereArgs: [1]);
   }
 
+  Future<List<DetailModel>> fetchAllDetails() async {
+    await ready;
+    final maps = await db.query("Details", columns: null);
+    final List<DetailModel> details = [];
+    for (Map<String, dynamic> dbMap in maps) {
+      details.add(DetailModel.fromDb(dbMap));
+    }
+    return details;
+  }
+
   Future<DetailModel> fetchDetail(String service, String username) async {
     await ready;
     final maps = await db.query("Details",
