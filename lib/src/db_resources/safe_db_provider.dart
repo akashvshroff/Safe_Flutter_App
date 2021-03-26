@@ -29,7 +29,7 @@ class SafeDbProvider {
               id INTEGER PRIMARY KEY, 
               service TEXT,
               username TEXT, 
-              encrypted_password TEXT
+              encryptedPassword TEXT
             )
           ''');
         newDb.execute('''
@@ -73,5 +73,23 @@ class SafeDbProvider {
     } else {
       return null;
     }
+  }
+
+  Future<int> addPassword(DetailModel item) async {
+    await ready;
+    return db.insert(
+      'Details',
+      item.toMapForDb(),
+    );
+  }
+
+  Future<int> updatePassword(DetailModel item) async {
+    await ready;
+    return db.update(
+      'Details',
+      item.toMapForDb(),
+      where: 'id = ?',
+      whereArgs: [item.id],
+    );
   }
 }
