@@ -1,7 +1,7 @@
 import 'package:encrypt/encrypt.dart';
 
 dynamic encryptPassword(String password, String keyString) {
-  final key = Key.fromUtf8(keyString);
+  final key = Key.fromUtf8(keyString); //key has to be length 32
   final iv = IV.fromLength(16);
 
   final encrypter = Encrypter(AES(key));
@@ -10,13 +10,13 @@ dynamic encryptPassword(String password, String keyString) {
   return encrypted;
 }
 
-String decryptPassword(dynamic encrypted_password, String keyString) {
+String decryptPassword(dynamic encryptedPassword, String keyString) {
   final key = Key.fromUtf8(keyString);
   final iv = IV.fromLength(16);
 
   final encrypter = Encrypter(AES(key));
 
-  final decrypted = encrypter.decrypt(encrypted_password, iv: iv);
+  final decrypted = encrypter.decrypt(encryptedPassword, iv: iv);
   return decrypted;
 }
 
