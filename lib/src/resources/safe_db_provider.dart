@@ -1,7 +1,5 @@
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
-import 'dart:io';
-import 'dart:convert';
 import 'package:path/path.dart';
 import '../models/detail_model.dart';
 
