@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart';
+import '../models/detail_model.dart';
 
 class SafeDbProvider {
   Database db;
@@ -28,7 +29,7 @@ class SafeDbProvider {
               id INTEGER PRIMARY KEY, 
               service TEXT,
               username TEXT, 
-              password TEXT
+              encrypted_password TEXT
             )
           ''');
         newDb.execute('''
@@ -41,5 +42,36 @@ class SafeDbProvider {
         newDb.execute('INSERT INTO Master (id, hash) values (1, NULL)');
       },
     );
+  }
+
+  Future<String> fetchMasterHash() async {
+    await ready;
+    final maps = await db
+        .query("Master", columns: null, where: 'id = ?', whereArgs: [1]);
+
+    if (maps[0]['hash'] != null) {
+      return maps[0]['hash'];
+    } else {
+      return null; //first time using app
+    }
+  }
+
+  Future<int> addMasterHash(String hash) async {
+    Map<String, dynamic> masterMap = {'id': 1, 'hash': hash};
+    return db.update('Master', masterMap, where: 'id = ?', whereArgs: [1]);
+  }
+
+  Future<DetailModel> fetchDetail(String service, String username) async {
+    await ready;
+    final maps = await db.query("Details",
+        columns: null,
+        where: 'service = ? AND username = ?',
+        whereArgs: [service, username]);
+
+    if (maps.length > 0) {
+      return DetailModel.fromDb(maps.first);
+    } else {
+      return null;
+    }
   }
 }
