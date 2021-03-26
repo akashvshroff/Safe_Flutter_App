@@ -1,4 +1,4 @@
-final Map<String, String> eff_wordlist = {
+final Map<String, String> effWordlist = {
   "11111": "abacus",
   "11112": "abdomen",
   "11113": "abdominal",
