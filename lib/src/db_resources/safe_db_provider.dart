@@ -29,7 +29,7 @@ class SafeDbProvider {
               id INTEGER PRIMARY KEY, 
               service TEXT,
               username TEXT, 
-              encryptedPassword TEXT
+              encryptedPassword BLOB
             )
           ''');
         newDb.execute('''

@@ -2,7 +2,7 @@ class DetailModel {
   final int id;
   final String service;
   final String username;
-  final String encryptedPassword;
+  dynamic encryptedPassword;
 
   DetailModel({this.id, this.service, this.username, this.encryptedPassword});
 
