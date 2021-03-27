@@ -7,9 +7,11 @@ class Bloc {
   final Repository _repository = Repository();
 
   final _masterPassword = PublishSubject<String>();
+  final _verifyMasterPassword = PublishSubject<bool>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
+  Stream<bool> get verifyMasterStream => _verifyMasterPassword.stream;
 
   void fetchMasterPassword() async {
     //add master password to master stream
@@ -22,9 +24,14 @@ class Bloc {
     return await _repository.getMasterHash();
   }
 
-  Future<bool> checkMasterPassword(String masterInput) async {
+  void checkMasterPassword(String masterInput) async {
     //checks whether the input password is correct
-    return await _repository.checkMasterPassword(masterInput);
+    bool result = await _repository.checkMasterPassword(masterInput);
+    if (result) {
+      _verifyMasterPassword.sink.add(true);
+    } else {
+      _verifyMasterPassword.sink.addError('Wrong password');
+    }
   }
 
   //stream for all the details and fn to add items to stream
@@ -34,5 +41,6 @@ class Bloc {
   //CRUD operations?
   void dispose() {
     _masterPassword.close();
+    _verifyMasterPassword.close();
   }
 }
