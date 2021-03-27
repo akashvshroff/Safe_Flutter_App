@@ -11,7 +11,6 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: "safe",
         theme: ThemeData(
-          primaryColor: Colors.black,
           brightness: Brightness.dark,
         ),
         onGenerateRoute: routes,
