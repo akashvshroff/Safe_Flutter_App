@@ -26,6 +26,7 @@ dependencies:
   sqflite: ^2.0.0+3
   encrypt: ^4.1.0
   crypto: ^2.1.5
+  rxdart: ^0.26.0
 
 
 
