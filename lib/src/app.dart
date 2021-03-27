@@ -5,6 +5,7 @@ import 'blocs/provider.dart';
 import 'screens/loading_screen.dart';
 import 'screens/master_password.dart';
 import 'screens/verify_master.dart';
+import 'screens/details_list.dart';
 
 class App extends StatelessWidget {
   @override
@@ -45,7 +46,10 @@ class App extends StatelessWidget {
         return VerifyMaster();
       });
     } else if (routeName.contains('details')) {
-      print('the app works');
+      return MaterialPageRoute(builder: (context) {
+        //call upon all details fetcher
+        return DetailsList();
+      });
     }
   }
 }
