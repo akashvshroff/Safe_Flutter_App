@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:safe/src/screens/master_password.dart';
+import 'package:safe/src/screens/verify_master.dart';
 import 'blocs/provider.dart';
 import 'screens/loading_screen.dart';
 import 'screens/master_password.dart';
+import 'screens/verify_master.dart';
 
 class App extends StatelessWidget {
   @override
@@ -38,6 +40,12 @@ class App extends StatelessWidget {
           return MasterPassword();
         },
       );
+    } else if (routeName.contains('verify')) {
+      return MaterialPageRoute(builder: (context) {
+        return VerifyMaster();
+      });
+    } else if (routeName.contains('details')) {
+      print('the app works');
     }
   }
 }
