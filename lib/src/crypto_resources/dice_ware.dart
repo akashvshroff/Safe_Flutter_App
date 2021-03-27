@@ -1,7 +1,7 @@
 import 'eff_wordlist.dart';
 import 'dart:math';
 
-String getDiceWarePassword(int length) {
+String diceWarePassword(int length) {
   List<String> words = [];
   Random rnd = Random.secure();
   for (int i = 0; i < length; i++) {
