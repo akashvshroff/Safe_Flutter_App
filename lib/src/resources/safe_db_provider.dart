@@ -69,35 +69,21 @@ class SafeDbProvider {
     return details;
   }
 
-  Future<DetailModel> fetchDetail(String service, String username) async {
-    await ready;
-    final maps = await db.query("Details",
-        columns: null,
-        where: 'service = ? AND username = ?',
-        whereArgs: [service, username]);
-
-    if (maps.length > 0) {
-      return DetailModel.fromDb(maps.first);
-    } else {
-      return null;
-    }
-  }
-
-  Future<int> addPassword(DetailModel item) async {
+  Future<int> addPassword(DetailModel detail) async {
     await ready;
     return db.insert(
       'Details',
-      item.toMapForDb(),
+      detail.toMapForDb(),
     );
   }
 
-  Future<int> updatePassword(DetailModel item) async {
+  Future<int> updatePassword(DetailModel detail) async {
     await ready;
     return db.update(
       'Details',
-      item.toMapForDb(),
+      detail.toMapForDb(),
       where: 'id = ?',
-      whereArgs: [item.id],
+      whereArgs: [detail.id],
     );
   }
 
