@@ -39,6 +39,11 @@ class Repository {
     return await safeDbProvider.fetchAllDetails();
   }
 
+  Future<DetailModel> fetchDetailById(int id) async {
+    //fetch detail based on id
+    return await safeDbProvider.fetchDetail(id);
+  }
+
   Future<int> addDetail(String password, String service, String username) {
     //add a fresh detail to the db
     String encryptedPassword =

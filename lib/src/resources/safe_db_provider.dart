@@ -69,6 +69,14 @@ class SafeDbProvider {
     return details;
   }
 
+  Future<DetailModel> fetchDetail(int id) async {
+    await ready;
+    final maps = await db
+        .query('Details', columns: null, where: 'id = ?', whereArgs: [id]);
+    final DetailModel detail = DetailModel.fromDb(maps[0]);
+    return detail;
+  }
+
   Future<int> addPassword(DetailModel detail) async {
     await ready;
     return db.insert(
