@@ -6,11 +6,11 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          changePage(context);
-        },
-        child: Center(
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            changePage(context);
+          },
           child: Text(
             'safe.',
             style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
