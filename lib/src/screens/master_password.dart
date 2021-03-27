@@ -110,5 +110,6 @@ class MasterPassword extends StatelessWidget {
             }),
       )
     ];
+    return children;
   }
 }
