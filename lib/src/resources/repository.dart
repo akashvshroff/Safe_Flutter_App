@@ -27,7 +27,7 @@ class Repository {
     //verifies inputted master password against hash in db
     String masterHash = await safeDbProvider.fetchMasterHash();
     if (verifyHash(masterInput, masterHash)) {
-      _master = masterInput;
+      this._master = masterInput;
       return true;
     } else {
       return false;
@@ -82,14 +82,14 @@ class Repository {
   String getEncryptedPassword(
       String password, String service, String username) {
     //get encrypted password using master and AES
-    String key = _master + service + username;
+    String key = this._master + service + username;
     key = key.substring(0, 32);
     return encryptPassword(password, key);
   }
 
   String getDecryptedPassword(DetailModel detail) {
     //get the original password from encrypted using master and AES
-    String key = _master + detail.service + detail.username;
+    String key = this._master + detail.service + detail.username;
     key = key.substring(0, 32);
     return decryptPassword(detail.encryptedPassword, key);
   }
