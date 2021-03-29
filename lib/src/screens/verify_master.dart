@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import '../blocs/provider.dart';
 
 class VerifyMaster extends StatefulWidget {
@@ -14,6 +13,7 @@ class _VerifyMasterState extends State<VerifyMaster> {
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         margin: EdgeInsets.all(20.0),
         child: Column(
