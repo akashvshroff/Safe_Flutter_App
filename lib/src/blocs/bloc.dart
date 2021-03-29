@@ -9,11 +9,16 @@ class Bloc {
   final _masterPassword = PublishSubject<String>();
   final _verifyMasterPassword = PublishSubject<bool>();
   final _showDetails = PublishSubject<List<DetailModel>>();
+  final _showDetailFocus = PublishSubject<DetailModel>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
   Stream<bool> get verifyMasterStream => _verifyMasterPassword.stream;
   Stream<List<DetailModel>> get details => _showDetails.stream;
+  Stream<DetailModel> get detailFocus => _showDetailFocus.stream;
+
+  //getters to sink
+  Function(DetailModel) get detailFocusSink => _showDetailFocus.sink.add;
 
   void fetchMasterPassword() async {
     //add master password to master stream
@@ -41,6 +46,15 @@ class Bloc {
     _showDetails.sink.add(details);
   }
 
+  void fetchDetailById(int id) async {
+    final DetailModel detail = await _repository.fetchDetailById(id);
+    _showDetailFocus.sink.add(detail);
+  }
+
+  Future<String> fetchDecryptedPassword(DetailModel detail) async {
+    return _repository.getDecryptedPassword(detail);
+  }
+
   //stream for all the details and fn to add items to stream
 
   //stream to add detail to the db?
@@ -53,5 +67,6 @@ class Bloc {
   void dispose() {
     _masterPassword.close();
     _verifyMasterPassword.close();
+    _showDetails.close();
   }
 }
