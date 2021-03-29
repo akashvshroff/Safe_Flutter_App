@@ -44,7 +44,7 @@ class Repository {
     return await safeDbProvider.fetchDetail(id);
   }
 
-  Future<int> addDetail(String password, String service, String username) {
+  Future<int> addDetail(String service, String username, String password) {
     //add a fresh detail to the db
     dynamic encryptedPassword =
         getEncryptedPassword(password, service, username);
