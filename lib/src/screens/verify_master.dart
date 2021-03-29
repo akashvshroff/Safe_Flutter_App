@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../blocs/provider.dart';
 
 class VerifyMaster extends StatefulWidget {
@@ -68,27 +69,41 @@ class _VerifyMasterState extends State<VerifyMaster> {
     );
   }
 
-  StreamBuilder getErrorField(Bloc bloc) {
-    return StreamBuilder(
-      stream: bloc.verifyMasterStream,
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Text(
-            'error: incorrect password.\nplease try again.',
-            style: TextStyle(
-              fontSize: 24.0,
-              color: Colors.red,
-            ),
-          );
-        } else if (!snapshot.hasData) {
-          return Container(
-            height: 0.0,
-            width: 0.0,
-          );
-        } else {
-          Navigator.pushNamed(context, '/details');
-        }
-      },
+  SizedBox getErrorField(Bloc bloc) {
+    return SizedBox(
+      height: 100.0,
+      child: StreamBuilder(
+        stream: bloc.verifyMasterStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text(
+              'error: incorrect password.\nplease try again.',
+              style: TextStyle(
+                fontSize: 24.0,
+                color: Colors.red,
+              ),
+            );
+          } else if (!snapshot.hasData) {
+            return Container(
+              height: 0.0,
+              width: 0.0,
+            );
+          } else {
+            return GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/details');
+              },
+              child: Text(
+                'successfully verified.\ntap here to proceed.',
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: Colors.green,
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
