@@ -12,7 +12,9 @@ class DetailTile extends StatelessWidget {
       decoration: BoxDecoration(border: Border.all()),
       margin: EdgeInsets.all(10.0),
       child: ListTile(
-          onTap: onTap,
+          onTap: () {
+            onTap(context);
+          },
           title: Text(
             '${detail.service}',
             style: TextStyle(fontSize: 20.0),
@@ -31,6 +33,9 @@ class DetailTile extends StatelessWidget {
     );
   }
 
-  void onTap() {}
+  void onTap(context) {
+    Navigator.pushNamed(context, '/detail/${detail.id}');
+  }
+
   void deleteDetail() {}
 }
