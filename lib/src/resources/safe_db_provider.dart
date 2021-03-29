@@ -16,7 +16,7 @@ class SafeDbProvider {
 
   Future init() async {
     var databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'passwords_safe.db');
+    String path = join(databasePath, 'passwords_safe_1.db');
     db = await openDatabase(
       path,
       version: 1,
@@ -27,7 +27,7 @@ class SafeDbProvider {
               id INTEGER PRIMARY KEY, 
               service TEXT,
               username TEXT, 
-              encryptedPassword BLOB
+              encryptedPassword TEXT
             )
           ''');
         newDb.execute('''

@@ -46,7 +46,7 @@ class Repository {
 
   Future<int> addDetail(String password, String service, String username) {
     //add a fresh detail to the db
-    String encryptedPassword =
+    dynamic encryptedPassword =
         getEncryptedPassword(password, service, username);
     DetailModel detail = DetailModel(
         id: null,

@@ -1,22 +1,23 @@
 import 'package:encrypt/encrypt.dart';
 
-dynamic encryptPassword(String password, String keyString) {
+String encryptPassword(String password, String keyString) {
   final key = Key.fromUtf8(keyString); //key has to be length 32
   final iv = IV.fromLength(16);
 
   final encrypter = Encrypter(AES(key));
 
   final encrypted = encrypter.encrypt(password, iv: iv);
-  return encrypted;
+  return encrypted.base64;
 }
 
-String decryptPassword(dynamic encryptedPassword, String keyString) {
+String decryptPassword(String encryptedPassword, String keyString) {
+  final encrypted = Encrypted.fromBase64(encryptedPassword);
   final key = Key.fromUtf8(keyString);
   final iv = IV.fromLength(16);
 
   final encrypter = Encrypter(AES(key));
 
-  final decrypted = encrypter.decrypt(encryptedPassword, iv: iv);
+  final decrypted = encrypter.decrypt(encrypted, iv: iv);
   return decrypted;
 }
 
@@ -29,5 +30,4 @@ String decryptPassword(dynamic encryptedPassword, String keyString) {
 //     keyString,
 //   );
 //   print(decryptPassword(encrypted_password, keyString));
-
 // }
