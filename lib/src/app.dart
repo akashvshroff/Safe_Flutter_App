@@ -57,9 +57,9 @@ class App extends StatelessWidget {
       return MaterialPageRoute(builder: (context) {
         int detailId = int.parse(routeName.replaceAll('/detail/', ''));
         final bloc = Provider.of(context);
-        bloc.fetchDetailById(detailId).then((DetailModel detail) {
-          return DetailFocus(detail: detail);
-        });
+        bloc.detailFocusSink(null); //resets previous event
+        bloc.fetchDetailById(detailId);
+        return DetailFocus();
       });
     }
   }
