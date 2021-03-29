@@ -10,15 +10,13 @@ class DetailTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(border: Border.all()),
-      margin: EdgeInsets.all(10.0),
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 5.0, 5.0),
       child: ListTile(
           onTap: () {
             onTap(context);
           },
-          title: Text(
-            '${detail.service}',
-            style: TextStyle(fontSize: 20.0),
-          ),
+          title: Text('${detail.service}',
+              style: TextStyle(fontSize: 20.0, color: Colors.white)),
           subtitle: Text(
             '${detail.username}',
             style: TextStyle(fontSize: 18.0),
@@ -26,7 +24,7 @@ class DetailTile extends StatelessWidget {
           trailing: IconButton(
             onPressed: deleteDetail,
             icon: Icon(
-              Icons.delete,
+              Icons.delete_outline,
               color: Colors.redAccent[400],
             ),
           )),
