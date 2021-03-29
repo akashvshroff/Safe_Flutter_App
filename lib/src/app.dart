@@ -6,6 +6,8 @@ import 'screens/loading_screen.dart';
 import 'screens/master_password.dart';
 import 'screens/verify_master.dart';
 import 'screens/details_list.dart';
+import 'screens/detail_focus.dart';
+import 'models/detail_model.dart';
 
 class App extends StatelessWidget {
   @override
@@ -47,8 +49,17 @@ class App extends StatelessWidget {
       });
     } else if (routeName.contains('details')) {
       return MaterialPageRoute(builder: (context) {
-        //call upon all details fetcher
+        final bloc = Provider.of(context);
+        bloc.fetchDetails();
         return DetailsList();
+      });
+    } else if (routeName.contains('detail')) {
+      return MaterialPageRoute(builder: (context) {
+        int detailId = int.parse(routeName.replaceAll('/detail/', ''));
+        final bloc = Provider.of(context);
+        bloc.fetchDetailById(detailId).then((DetailModel detail) {
+          return DetailFocus(detail: detail);
+        });
       });
     }
   }
