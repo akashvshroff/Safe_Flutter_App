@@ -64,9 +64,14 @@ class Bloc {
     return _repository.addDetail(service, username, password);
   }
 
+  Future<int> deleteDetailById(int id) {
+    return _repository.deleteDetail(id);
+  }
+
   void dispose() {
     _masterPassword.close();
     _verifyMasterPassword.close();
     _showDetails.close();
+    _showDetailFocus.close();
   }
 }

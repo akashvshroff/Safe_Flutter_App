@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/detail_model.dart';
+import '../blocs/provider.dart';
 
 class DetailTile extends StatelessWidget {
   final DetailModel detail;
@@ -8,6 +9,7 @@ class DetailTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Provider.of(context);
     return Container(
       decoration: BoxDecoration(border: Border.all()),
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 5.0, 5.0),
@@ -22,7 +24,9 @@ class DetailTile extends StatelessWidget {
             style: TextStyle(fontSize: 18.0),
           ),
           trailing: IconButton(
-            onPressed: deleteDetail,
+            onPressed: () {
+              deleteDetail(context, bloc);
+            },
             icon: Icon(
               Icons.delete_outline,
               color: Colors.redAccent[400],
@@ -35,5 +39,37 @@ class DetailTile extends StatelessWidget {
     Navigator.pushNamed(context, '/detail/${detail.id}');
   }
 
-  void deleteDetail() {}
+  void deleteDetail(context, bloc) {
+    AlertDialog alert = AlertDialog(
+      title: Text("warning."),
+      content: Text("this is a permament process and cannot be undone."),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              'cancel',
+              style: TextStyle(color: Colors.green),
+            )),
+        TextButton(
+          onPressed: () async {
+            await bloc.deleteDetailById(detail.id);
+            bloc.fetchDetails();
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'continue',
+            style: TextStyle(color: Colors.redAccent[400]),
+          ),
+        )
+      ],
+    );
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        });
+  }
 }
