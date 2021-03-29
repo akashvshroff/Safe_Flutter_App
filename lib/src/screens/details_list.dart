@@ -39,7 +39,7 @@ class DetailsList extends StatelessWidget {
             },
           ),
           onRefresh: () {
-            bloc.fetchDetails();
+            return bloc.fetchDetails();
           },
         );
       },

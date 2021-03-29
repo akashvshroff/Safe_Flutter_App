@@ -41,7 +41,7 @@ class Bloc {
     }
   }
 
-  void fetchDetails() async {
+  Future<void> fetchDetails() async {
     List<DetailModel> details = await _repository.fetchAllDetails();
     _showDetails.sink.add(details);
   }
