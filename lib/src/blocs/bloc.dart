@@ -8,10 +8,12 @@ class Bloc {
 
   final _masterPassword = PublishSubject<String>();
   final _verifyMasterPassword = PublishSubject<bool>();
+  final _showDetails = PublishSubject<List<DetailModel>>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
   Stream<bool> get verifyMasterStream => _verifyMasterPassword.stream;
+  Stream<List<DetailModel>> get details => _showDetails.stream;
 
   void fetchMasterPassword() async {
     //add master password to master stream
@@ -34,11 +36,20 @@ class Bloc {
     }
   }
 
+  void fetchDetails() async {
+    List<DetailModel> details = await _repository.fetchAllDetails();
+    _showDetails.sink.add(details);
+  }
+
   //stream for all the details and fn to add items to stream
 
   //stream to add detail to the db?
 
   //CRUD operations?
+  Future<int> addDetail(String service, String username, String password) {
+    return _repository.addDetail(service, username, password);
+  }
+
   void dispose() {
     _masterPassword.close();
     _verifyMasterPassword.close();
