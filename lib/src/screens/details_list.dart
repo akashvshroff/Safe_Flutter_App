@@ -31,10 +31,15 @@ class DetailsList extends StatelessWidget {
         }
         final List<DetailModel> details =
             snapshot.data != null ? snapshot.data : [];
-        return ListView.builder(
-          itemCount: details.length,
-          itemBuilder: (context, index) {
-            return DetailTile(detail: details[index]);
+        return RefreshIndicator(
+          child: ListView.builder(
+            itemCount: details.length,
+            itemBuilder: (context, index) {
+              return DetailTile(detail: details[index]);
+            },
+          ),
+          onRefresh: () {
+            bloc.fetchDetails();
           },
         );
       },
