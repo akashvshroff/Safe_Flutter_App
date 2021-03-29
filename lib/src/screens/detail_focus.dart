@@ -20,6 +20,13 @@ class _DetailFocusState extends State<DetailFocus> {
       appBar: AppBar(
         title: Text("detail."),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/details');
+          },
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
