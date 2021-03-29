@@ -15,7 +15,7 @@ class DetailTile extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(10.0, 10.0, 5.0, 5.0),
       child: ListTile(
           onTap: () {
-            onTap(context);
+            onTap(context, bloc);
           },
           title: Text('${detail.service}',
               style: TextStyle(fontSize: 20.0, color: Colors.white)),
@@ -35,8 +35,9 @@ class DetailTile extends StatelessWidget {
     );
   }
 
-  void onTap(context) {
+  void onTap(context, bloc) {
     Navigator.pushNamed(context, '/detail/${detail.id}');
+    bloc.fetchDetails();
   }
 
   void deleteDetail(context, bloc) {
