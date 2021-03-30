@@ -179,5 +179,7 @@ class _DetailFocusState extends State<DetailFocus> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  void editPassword(BuildContext context) {}
+  void editPassword(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/edit/${detail.id}');
+  }
 }
