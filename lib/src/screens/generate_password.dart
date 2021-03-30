@@ -67,7 +67,8 @@ class _GeneratePasswordState extends State<GeneratePassword> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: Icon(Icons.cancel, color: Colors.red),
+            iconSize: 40.0,
+            icon: Icon(Icons.cancel_outlined, color: Colors.red),
             onPressed: () {
               cancel(context);
             },
@@ -76,7 +77,8 @@ class _GeneratePasswordState extends State<GeneratePassword> {
             width: 50,
           ),
           IconButton(
-            icon: Icon(Icons.done, color: Colors.blue),
+            iconSize: 40.0,
+            icon: Icon(Icons.done, color: Colors.green),
             onPressed: () {
               submit(context);
             },
