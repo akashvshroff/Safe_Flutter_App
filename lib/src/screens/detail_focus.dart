@@ -171,7 +171,15 @@ class _DetailFocusState extends State<DetailFocus> {
   }
 
   void showSnackBar(String content) {
-    final snackBar = SnackBar(content: Text('$content'));
+    final snackBar = SnackBar(
+      content: Text('$content'),
+      action: SnackBarAction(
+        label: 'ok.',
+        onPressed: () {
+          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        },
+      ),
+    );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
