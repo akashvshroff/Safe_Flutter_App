@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/detail_model.dart';
 import '../blocs/provider.dart';
+import 'package:flutter/services.dart';
 
 class DetailFocus extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class DetailFocus extends StatefulWidget {
 class _DetailFocusState extends State<DetailFocus> {
   Bloc bloc;
   String passwordText = '*' * 12;
-  List<bool> _selected = [false, true];
+  List<bool> _selected = [false, true, false];
   DetailModel detail;
 
   @override
@@ -85,9 +86,9 @@ class _DetailFocusState extends State<DetailFocus> {
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            width: 80,
+            width: 40,
           ),
-          getToggle()
+          getToggle(),
         ],
       ),
       SizedBox(
@@ -136,10 +137,16 @@ class _DetailFocusState extends State<DetailFocus> {
         Icon(
           Icons.visibility_off,
           color: Colors.white,
+        ),
+        Icon(
+          Icons.copy,
+          color: Colors.white,
         )
       ],
       isSelected: _selected,
-      onPressed: toggleFunction,
+      onPressed: (int index) {
+        toggleFunction(index);
+      },
     );
   }
 
@@ -151,13 +158,25 @@ class _DetailFocusState extends State<DetailFocus> {
       setState(() {
         passwordText = decryptedPassword;
       });
-    } else {
+    } else if (index == 1) {
       _selected[1] = true;
       _selected[0] = false;
       setState(() {
         passwordText = '*' * 12;
       });
+    } else {
+      if (_selected[0] != true) {
+        showSnackBar("error: can't copy password if not visible.");
+        return;
+      }
+      Clipboard.setData(ClipboardData(text: passwordText));
+      showSnackBar('password copied to clipboard.');
     }
+  }
+
+  void showSnackBar(String content) {
+    final snackBar = SnackBar(content: Text('$content'));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void editPassword(BuildContext context) {}
