@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../blocs/provider.dart';
+import '../models/detail_model.dart';
 
 class DetailEdit extends StatefulWidget {
   final String pageTitle;
@@ -40,7 +42,6 @@ class _DetailEditState extends State<DetailEdit> {
       margin: EdgeInsets.all(20.0),
       child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: getChildren(bloc),
         ),
@@ -50,9 +51,6 @@ class _DetailEditState extends State<DetailEdit> {
 
   List<Widget> getChildren(bloc) {
     List<Widget> children = [
-      SizedBox(
-        height: 10.0,
-      ),
       Text(
         'service:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -76,13 +74,11 @@ class _DetailEditState extends State<DetailEdit> {
         height: 40.0,
       ),
       Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             'password:',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            width: 40,
           ),
           getGenerateButton(),
         ],
@@ -92,7 +88,7 @@ class _DetailEditState extends State<DetailEdit> {
       ),
       getInputField(passwordController, 21.0),
       SizedBox(
-        height: 40.0,
+        height: 60.0,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -123,13 +119,13 @@ class _DetailEditState extends State<DetailEdit> {
 
   StreamBuilder fetchDetailsForEdit(bloc) {
     return StreamBuilder(
-      stream: bloc.editDetail,
+      stream: bloc.detailFocus,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final map = snapshot.data;
-          serviceController.text = map['service'];
-          usernameController.text = map['username'];
-          passwordController.text = map['password'];
+          final detail = snapshot.data;
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setControllerValues(bloc, detail);
+          });
         }
         return Container(
           height: 0.0,
@@ -137,6 +133,12 @@ class _DetailEditState extends State<DetailEdit> {
         );
       },
     );
+  }
+
+  void setControllerValues(Bloc bloc, DetailModel detail) async {
+    serviceController.text = detail.service;
+    usernameController.text = detail.username;
+    passwordController.text = await bloc.fetchDecryptedPassword(detail);
   }
 
   TextField getInputField(controller, double size) {
