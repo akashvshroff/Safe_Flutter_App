@@ -116,8 +116,27 @@ class _DetailEditState extends State<DetailEdit> {
           ),
         ],
       ),
+      fetchDetailsForEdit(bloc),
     ];
     return children;
+  }
+
+  StreamBuilder fetchDetailsForEdit(bloc) {
+    return StreamBuilder(
+      stream: bloc.editDetail,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final map = snapshot.data;
+          serviceController.text = map['service'];
+          usernameController.text = map['username'];
+          passwordController.text = map['password'];
+        }
+        return Container(
+          height: 0.0,
+          width: 0.0,
+        );
+      },
+    );
   }
 
   TextField getInputField(controller, double size) {
@@ -164,6 +183,16 @@ class _DetailEditState extends State<DetailEdit> {
       showSnackBar("error: can't save if any fields are empty.");
       return;
     }
-    bloc.addDetail(service, username, password);
+    if (detailId != null) {
+      //edit detail
+      bloc.updateDetail(detailId, service, username, password);
+      bloc.fetchDetails();
+      Navigator.pop(context);
+    } else {
+      //add detail
+      bloc.addDetail(service, username, password);
+      bloc.fetchDetails();
+      Navigator.pop(context);
+    }
   }
 }
