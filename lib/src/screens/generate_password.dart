@@ -34,35 +34,22 @@ class _GeneratePasswordState extends State<GeneratePassword> {
 
   List<Widget> getChildren(Bloc bloc, context) {
     List<Widget> children = [
-      SizedBox(
-        height: 10.0,
-      ),
       Text(
         'choose your\nmethod:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 20.0,
-      ),
+      Spacer(),
       memorizable(bloc),
-      SizedBox(
-        height: 10.0,
-      ),
+      Spacer(),
       random(bloc),
-      SizedBox(
-        height: 20.0,
-      ),
+      Spacer(),
       Text(
         'password:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 20.0,
-      ),
+      Spacer(),
       passwordBuilder(bloc),
-      SizedBox(
-        height: 20.0,
-      ),
+      Spacer(),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -72,9 +59,6 @@ class _GeneratePasswordState extends State<GeneratePassword> {
             onPressed: () {
               cancel(context);
             },
-          ),
-          SizedBox(
-            width: 50,
           ),
           IconButton(
             iconSize: 40.0,

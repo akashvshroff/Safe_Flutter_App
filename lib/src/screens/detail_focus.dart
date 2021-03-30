@@ -54,30 +54,27 @@ class _DetailFocusState extends State<DetailFocus> {
 
   List<Widget> getChildren() {
     List<Widget> children = [
-      SizedBox(
-        height: 10.0,
-      ),
       Text(
         'service:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 20.0,
+      Spacer(
+        flex: 4,
       ),
       showUserInfo(detail.service),
-      SizedBox(
-        height: 20.0,
+      Spacer(
+        flex: 5,
       ),
       Text(
         'username:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 20.0,
+      Spacer(
+        flex: 4,
       ),
       showUserInfo(detail.username),
-      SizedBox(
-        height: 20.0,
+      Spacer(
+        flex: 5,
       ),
       Row(
         children: [
@@ -85,16 +82,15 @@ class _DetailFocusState extends State<DetailFocus> {
             'password:',
             style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            width: 40,
-          ),
+          Spacer(),
           getToggle(),
         ],
       ),
-      SizedBox(
-        height: 20.0,
+      Spacer(
+        flex: 4,
       ),
       showUserInfo(passwordText),
+      Spacer(flex: 4),
     ];
     return children;
   }
