@@ -77,9 +77,9 @@ class App extends StatelessWidget {
     } else if (routeName.contains('edit')) {
       return MaterialPageRoute(builder: (context) {
         final bloc = Provider.of(context);
-        bloc.editDetailSink(null);
+        bloc.detailFocusSink(null);
         int detailId = int.parse(routeName.replaceAll('/edit/', ''));
-        bloc.editDetailWithId(detailId);
+        bloc.fetchDetailById(detailId);
         return DetailEdit(
           pageTitle: 'edit.',
           detailId: detailId,
