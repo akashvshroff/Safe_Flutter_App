@@ -11,6 +11,7 @@ class Bloc {
   final _showDetails = PublishSubject<List<DetailModel>>();
   final _showDetailFocus = PublishSubject<DetailModel>();
   final _generatePassword = PublishSubject<String>();
+  final _editDetail = PublishSubject<Map<String, dynamic>>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
@@ -18,10 +19,12 @@ class Bloc {
   Stream<List<DetailModel>> get details => _showDetails.stream;
   Stream<DetailModel> get detailFocus => _showDetailFocus.stream;
   Stream<String> get generatePasswordStream => _generatePassword.stream;
+  Stream<Map<String, dynamic>> get editDetail => _editDetail.stream;
 
   //getters to sink
   Function(DetailModel) get detailFocusSink => _showDetailFocus.sink.add;
   Function(String) get generatePasswordSink => _generatePassword.sink.add;
+  Function(Map<String, dynamic>) get editDetailSink => _editDetail.sink.add;
 
   void fetchMasterPassword() async {
     //add master password to master stream
@@ -68,6 +71,17 @@ class Bloc {
     return _repository.getDecryptedPassword(detail);
   }
 
+  void editDetailWithId(int id) async {
+    final detail = await _repository.fetchDetailById(id);
+    String decryptedPassword = await fetchDecryptedPassword(detail);
+    editDetailSink({
+      'id': detail.id,
+      'service': detail.service,
+      'username': detail.username,
+      'password': decryptedPassword
+    });
+  }
+
   //stream for all the details and fn to add items to stream
 
   //stream to add detail to the db?
@@ -75,6 +89,12 @@ class Bloc {
   //CRUD operations?
   Future<int> addDetail(String service, String username, String password) {
     return _repository.addDetail(service, username, password);
+  }
+
+  Future<int> updateDetail(int id, String service, username, String password) {
+    DetailModel detail = DetailModel(
+        id: id, service: service, username: username, encryptedPassword: '');
+    return _repository.updateDetail(password, detail);
   }
 
   Future<int> deleteDetailById(int id) {
@@ -86,5 +106,7 @@ class Bloc {
     _verifyMasterPassword.close();
     _showDetails.close();
     _showDetailFocus.close();
+    _generatePassword.close();
+    _editDetail.close();
   }
 }
