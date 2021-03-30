@@ -49,7 +49,7 @@ class DetailsList extends StatelessWidget {
   Widget buildButton(context) {
     return FloatingActionButton(
       onPressed: () {
-        // Navigator.pushNamed(context, '/add');
+        Navigator.pushNamed(context, '/add');
       },
       backgroundColor: Colors.blue,
       child: Icon(Icons.add, color: Colors.white),
