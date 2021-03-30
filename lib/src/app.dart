@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:safe/src/screens/master_password.dart';
-import 'package:safe/src/screens/verify_master.dart';
+
 import 'blocs/provider.dart';
+import 'models/detail_model.dart';
+
 import 'screens/loading_screen.dart';
 import 'screens/master_password.dart';
 import 'screens/verify_master.dart';
 import 'screens/details_list.dart';
 import 'screens/detail_focus.dart';
-import 'models/detail_model.dart';
+import 'screens/generate_password.dart';
+import 'screens/detail_edit.dart';
 
 class App extends StatelessWidget {
   @override
@@ -19,6 +21,7 @@ class App extends StatelessWidget {
           fontFamily: 'Roboto',
           brightness: Brightness.dark,
         ),
+        // home: GeneratePassword(),
         onGenerateRoute: routes,
       ),
     );
@@ -57,9 +60,30 @@ class App extends StatelessWidget {
       return MaterialPageRoute(builder: (context) {
         int detailId = int.parse(routeName.replaceAll('/detail/', ''));
         final bloc = Provider.of(context);
-        bloc.detailFocusSink(null); //resets previous event
+        bloc.detailFocusSink(null);
         bloc.fetchDetailById(detailId);
         return DetailFocus();
+      });
+    } else if (routeName.contains('add')) {
+      return MaterialPageRoute(builder: (context) {
+        return DetailEdit(pageTitle: 'add.', detailId: null);
+      });
+    } else if (routeName.contains('generate')) {
+      return MaterialPageRoute(builder: (context) {
+        final bloc = Provider.of(context);
+        bloc.generatePasswordSink(null);
+        return GeneratePassword();
+      });
+    } else if (routeName.contains('edit')) {
+      return MaterialPageRoute(builder: (context) {
+        final bloc = Provider.of(context);
+        bloc.editDetailSink(null);
+        int detailId = int.parse(routeName.replaceAll('/edit/', ''));
+        bloc.editDetailWithId(detailId);
+        return DetailEdit(
+          pageTitle: 'edit.',
+          detailId: detailId,
+        );
       });
     }
   }
