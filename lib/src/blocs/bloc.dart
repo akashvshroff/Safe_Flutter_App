@@ -10,15 +10,18 @@ class Bloc {
   final _verifyMasterPassword = PublishSubject<bool>();
   final _showDetails = PublishSubject<List<DetailModel>>();
   final _showDetailFocus = PublishSubject<DetailModel>();
+  final _generatePassword = PublishSubject<String>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
   Stream<bool> get verifyMasterStream => _verifyMasterPassword.stream;
   Stream<List<DetailModel>> get details => _showDetails.stream;
   Stream<DetailModel> get detailFocus => _showDetailFocus.stream;
+  Stream<String> get generatePasswordStream => _generatePassword.stream;
 
   //getters to sink
   Function(DetailModel) get detailFocusSink => _showDetailFocus.sink.add;
+  Function(String) get generatePasswordSink => _generatePassword.sink.add;
 
   void fetchMasterPassword() async {
     //add master password to master stream
@@ -39,6 +42,16 @@ class Bloc {
     } else {
       _verifyMasterPassword.sink.addError('Wrong password');
     }
+  }
+
+  void fetchDiceWarePassword() {
+    String password = _repository.getDiceWarePassword();
+    generatePasswordSink(password);
+  }
+
+  void fetchRandomPassword() {
+    String password = _repository.getRandomPassword();
+    generatePasswordSink(password);
   }
 
   Future<void> fetchDetails() async {
