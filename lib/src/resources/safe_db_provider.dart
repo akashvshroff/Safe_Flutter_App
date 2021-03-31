@@ -16,7 +16,7 @@ class SafeDbProvider {
 
   Future init() async {
     var databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'passwords_safe_2.db');
+    String path = join(databasePath, 'safe_details.db');
     db = await openDatabase(
       path,
       version: 1,
