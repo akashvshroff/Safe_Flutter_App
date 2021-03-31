@@ -172,8 +172,13 @@ class _DetailFocusState extends State<DetailFocus> {
 
   void showSnackBar(String content) {
     final snackBar = SnackBar(
-      content: Text('$content'),
+      content: Text(
+        '$content',
+        style: TextStyle(color: Colors.white, fontSize: 16.0),
+      ),
+      backgroundColor: Colors.grey[700],
       action: SnackBarAction(
+        textColor: Colors.blue,
         label: 'ok.',
         onPressed: () {
           ScaffoldMessenger.of(context).hideCurrentSnackBar();

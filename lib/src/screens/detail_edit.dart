@@ -173,7 +173,13 @@ class _DetailEditState extends State<DetailEdit> {
   }
 
   void showSnackBar(String content) {
-    final snackBar = SnackBar(content: Text('$content'));
+    final snackBar = SnackBar(
+      content: Text(
+        '$content',
+        style: TextStyle(color: Colors.white, fontSize: 16.0),
+      ),
+      backgroundColor: Colors.grey[700],
+    );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
@@ -190,11 +196,13 @@ class _DetailEditState extends State<DetailEdit> {
       bloc.updateDetail(detailId, service, username, password);
       bloc.fetchDetails();
       Navigator.pop(context);
+      showSnackBar('information edited successfully.');
     } else {
       //add detail
       bloc.addDetail(service, username, password);
       bloc.fetchDetails();
       Navigator.pop(context);
+      showSnackBar('information added successfully.');
     }
   }
 }
