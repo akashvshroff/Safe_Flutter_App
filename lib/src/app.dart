@@ -21,13 +21,11 @@ class App extends StatelessWidget {
           fontFamily: 'Roboto',
           brightness: Brightness.dark,
         ),
-        // home: GeneratePassword(),
         onGenerateRoute: routes,
+        onUnknownRoute: (settings) =>
+            MaterialPageRoute(builder: (context) => DetailsList()),
       ),
     );
-
-    //show loading screen with either a gesture detector or FutureBuilder with a delayed future that changes
-    //screen on tap and then checks for master.
   }
 
   Route routes(RouteSettings settings) {
