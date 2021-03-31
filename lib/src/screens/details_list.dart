@@ -71,6 +71,7 @@ class _DetailsListState extends State<DetailsList> {
               size: 32.0,
             ),
             onPressed: () {
+              FocusScope.of(context).unfocus();
               setState(() {
                 queryString = queryController.text.toLowerCase();
               });
