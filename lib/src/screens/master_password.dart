@@ -99,12 +99,15 @@ class MasterPassword extends StatelessWidget {
         ),
       ),
       SizedBox(
-        height: 40.0,
+        height: 30.0,
       ),
       Center(
         child: IconButton(
             color: Colors.blue,
-            icon: Icon(Icons.check),
+            icon: Icon(
+              Icons.check,
+              size: 40.0,
+            ),
             onPressed: () {
               changePage(context);
             }),
