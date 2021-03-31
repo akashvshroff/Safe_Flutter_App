@@ -40,7 +40,7 @@ class App extends StatelessWidget {
       return MaterialPageRoute(
         builder: (context) {
           final bloc = Provider.of(context);
-          bloc.fetchMasterPassword();
+          bloc.fetchMasterPassword(); //call upon fn to add password to stream
           return MasterPassword();
         },
       );
@@ -51,15 +51,15 @@ class App extends StatelessWidget {
     } else if (routeName.contains('details')) {
       return MaterialPageRoute(builder: (context) {
         final bloc = Provider.of(context);
-        bloc.fetchDetails();
+        bloc.fetchDetails(); //call upon fn to fetch details and add to stream
         return DetailsList();
       });
     } else if (routeName.contains('detail')) {
       return MaterialPageRoute(builder: (context) {
         int detailId = int.parse(routeName.replaceAll('/detail/', ''));
         final bloc = Provider.of(context);
-        bloc.detailFocusSink(null);
-        bloc.fetchDetailById(detailId);
+        bloc.detailFocusSink(null); //resets the previous fetched detail
+        bloc.fetchDetailById(detailId); //fetch detail with particular id
         return DetailFocus();
       });
     } else if (routeName.contains('add')) {
@@ -69,15 +69,15 @@ class App extends StatelessWidget {
     } else if (routeName.contains('generate')) {
       return MaterialPageRoute(builder: (context) {
         final bloc = Provider.of(context);
-        bloc.generatePasswordSink(null);
+        bloc.generatePasswordSink(null); //resets previous generated password
         return GeneratePassword();
       });
     } else if (routeName.contains('edit')) {
       return MaterialPageRoute(builder: (context) {
         final bloc = Provider.of(context);
-        bloc.detailFocusSink(null);
+        bloc.detailFocusSink(null); //resets the previous fetched detail
         int detailId = int.parse(routeName.replaceAll('/edit/', ''));
-        bloc.fetchDetailById(detailId);
+        bloc.fetchDetailById(detailId); //fetch detail with particular id
         return DetailEdit(
           pageTitle: 'edit.',
           detailId: detailId,
