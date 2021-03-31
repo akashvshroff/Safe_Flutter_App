@@ -76,34 +76,62 @@ class _VerifyMasterState extends State<VerifyMaster> {
         stream: bloc.verifyMasterStream,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text(
-              'error: incorrect password.\nplease try again.',
-              style: TextStyle(
-                fontSize: 24.0,
-                color: Colors.red,
-              ),
-            );
+            return getIncorrect();
           } else if (!snapshot.hasData) {
             return Container(
               height: 0.0,
               width: 0.0,
             );
           } else {
-            return GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/details');
-              },
-              child: Text(
-                'successfully verified.\ntap here to proceed.',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.green,
-                ),
-              ),
-            );
+            return getCorrect();
           }
         },
       ),
+    );
+  }
+
+  Row getIncorrect() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'incorrect password.\nplease try again.',
+          style: TextStyle(
+            fontSize: 24.0,
+            color: Colors.red,
+          ),
+        ),
+        Icon(
+          Icons.error_outline,
+          color: Colors.white,
+          size: 40.0,
+        ),
+      ],
+    );
+  }
+
+  Row getCorrect() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'verified password.\ntap lock to access\nsafe.',
+          style: TextStyle(
+            fontSize: 24.0,
+            color: Colors.green,
+          ),
+        ),
+        IconButton(
+          icon: Icon(
+            Icons.lock_open_outlined,
+            color: Colors.white,
+            size: 40.0,
+          ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/details');
+          },
+        ),
+      ],
     );
   }
 }
