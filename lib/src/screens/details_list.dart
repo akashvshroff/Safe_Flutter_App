@@ -3,7 +3,15 @@ import '../blocs/provider.dart';
 import '../models/detail_model.dart';
 import '../widgets/detail_tile.dart';
 
-class DetailsList extends StatelessWidget {
+class DetailsList extends StatefulWidget {
+  @override
+  _DetailsListState createState() => _DetailsListState();
+}
+
+class _DetailsListState extends State<DetailsList> {
+  final queryController = TextEditingController();
+  String queryString = '';
+
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of(context);
@@ -14,9 +22,61 @@ class DetailsList extends StatelessWidget {
           'safe.',
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search_off, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                queryString = '';
+                queryController.text = '';
+              });
+            },
+          ),
+        ],
       ),
-      body: buildList(bloc),
+      body: buildBody(bloc),
       floatingActionButton: buildButton(context),
+    );
+  }
+
+  Widget buildBody(Bloc bloc) {
+    return Column(
+      children: [
+        searchQuery(),
+        Expanded(
+          child: buildList(bloc),
+        )
+      ],
+    );
+  }
+
+  Widget searchQuery() {
+    return Card(
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 5.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: queryController,
+              style: TextStyle(fontSize: 18.0),
+              decoration: InputDecoration(
+                  hintText: 'enter service name.',
+                  contentPadding: EdgeInsets.all(10.0)),
+            ),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.green,
+            ),
+            onPressed: () {
+              setState(() {
+                queryString = queryController.text.toLowerCase();
+              });
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -35,7 +95,12 @@ class DetailsList extends StatelessWidget {
           child: ListView.builder(
             itemCount: details.length,
             itemBuilder: (context, index) {
-              return DetailTile(detail: details[index]);
+              if (details[index].service.toLowerCase().contains(queryString) ||
+                  queryString == '') {
+                return DetailTile(detail: details[index]);
+              } else {
+                return Container(height: 0.0, width: 0.0);
+              }
             },
           ),
           onRefresh: () {
