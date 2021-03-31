@@ -52,7 +52,7 @@ class _DetailsListState extends State<DetailsList> {
 
   Widget searchQuery() {
     return Card(
-      margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 5.0),
+      margin: EdgeInsets.fromLTRB(10.0, 10.0, 8.0, 5.0),
       child: Row(
         children: [
           Expanded(
@@ -68,6 +68,7 @@ class _DetailsListState extends State<DetailsList> {
             icon: Icon(
               Icons.search,
               color: Colors.green,
+              size: 32.0,
             ),
             onPressed: () {
               setState(() {
