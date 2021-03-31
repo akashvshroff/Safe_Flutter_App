@@ -42,17 +42,21 @@ class DetailTile extends StatelessWidget {
 
   void deleteDetail(context, bloc) {
     AlertDialog alert = AlertDialog(
-      title: Text("warning."),
-      content: Text("this is a permament process and cannot be undone."),
+      title: Text(
+        "warning.",
+        style: TextStyle(fontSize: 20.0),
+      ),
+      content: Text(
+        "this is a permament process and cannot be undone.",
+        style: TextStyle(fontSize: 18.0),
+      ),
       actions: [
         TextButton(
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text(
-              'cancel',
-              style: TextStyle(color: Colors.green),
-            )),
+            child: Text('cancel',
+                style: TextStyle(color: Colors.green, fontSize: 16.0))),
         TextButton(
           onPressed: () async {
             await bloc.deleteDetailById(detail.id);
@@ -61,7 +65,7 @@ class DetailTile extends StatelessWidget {
           },
           child: Text(
             'continue',
-            style: TextStyle(color: Colors.redAccent[400]),
+            style: TextStyle(color: Colors.redAccent[400], fontSize: 16.0),
           ),
         )
       ],
