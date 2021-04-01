@@ -18,7 +18,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: "safe",
         theme: ThemeData(
-          fontFamily: 'Roboto',
+          fontFamily: 'Recursive',
           brightness: Brightness.dark,
         ),
         onGenerateRoute: routes,
