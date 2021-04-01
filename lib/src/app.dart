@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'blocs/provider.dart';
-import 'models/detail_model.dart';
-
 import 'screens/loading_screen.dart';
 import 'screens/master_password.dart';
 import 'screens/verify_master.dart';
@@ -16,6 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider(
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: "safe",
         theme: ThemeData(
           fontFamily: 'Recursive',
