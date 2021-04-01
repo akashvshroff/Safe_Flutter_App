@@ -38,16 +38,14 @@ class MasterPassword extends StatelessWidget {
 
   List<Widget> getChildren(String password, BuildContext context) {
     List<Widget> children = [
-      SizedBox(
-        height: 30.0,
+      Spacer(
+        flex: 2,
       ),
       Text(
         'your master\npassword:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 40.0,
-      ),
+      Spacer(),
       SizedBox(
         height: 100.0,
         child: Card(
@@ -61,16 +59,12 @@ class MasterPassword extends StatelessWidget {
           ),
         ),
       ),
-      SizedBox(
-        height: 30.0,
-      ),
+      Spacer(),
       Text(
         'notes:',
         style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
       ),
-      SizedBox(
-        height: 20.0,
-      ),
+      Spacer(),
       ListTile(
         leading: Icon(Icons.fiber_manual_record),
         title: Text(
@@ -98,9 +92,7 @@ class MasterPassword extends StatelessWidget {
           style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
         ),
       ),
-      SizedBox(
-        height: 40.0,
-      ),
+      Spacer(),
       Center(
         child: IconButton(
             color: Colors.blue,
@@ -111,7 +103,8 @@ class MasterPassword extends StatelessWidget {
             onPressed: () {
               changePage(context);
             }),
-      )
+      ),
+      Spacer(),
     ];
     return children;
   }
