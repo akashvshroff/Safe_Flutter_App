@@ -99,7 +99,7 @@ class MasterPassword extends StatelessWidget {
         ),
       ),
       SizedBox(
-        height: 30.0,
+        height: 50.0,
       ),
       Center(
         child: IconButton(
