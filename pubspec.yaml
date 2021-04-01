@@ -70,7 +70,9 @@ flutter:
     - family: Roboto
       fonts:
         - asset: fonts/roboto.ttf
-
+    - family: Recursive
+      fonts:
+        - asset: fonts/recursive.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
