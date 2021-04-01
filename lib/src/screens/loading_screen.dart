@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import '../blocs/provider.dart';
 
 class LoadingScreen extends StatelessWidget {
