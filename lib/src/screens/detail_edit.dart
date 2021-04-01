@@ -42,6 +42,7 @@ class _DetailEditState extends State<DetailEdit> {
       margin: EdgeInsets.all(20.0),
       child: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: getChildren(bloc),
         ),
@@ -141,11 +142,14 @@ class _DetailEditState extends State<DetailEdit> {
     passwordController.text = await bloc.fetchDecryptedPassword(detail);
   }
 
-  TextField getInputField(controller, double size) {
-    return TextField(
-      controller: controller,
-      style: TextStyle(fontSize: size),
-      maxLines: null,
+  Widget getInputField(controller, double size) {
+    return Flexible(
+      child: TextField(
+        decoration: InputDecoration(border: OutlineInputBorder()),
+        controller: controller,
+        style: TextStyle(fontSize: size),
+        maxLines: null,
+      ),
     );
   }
 
