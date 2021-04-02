@@ -12,6 +12,12 @@
 - Local SQL storage with the [flutter SQFlite package](https://pub.dev/packages/sqflite).
 
 ## Screenshots:
+- Here are some of the key shots of the app, you could observe the rest in the [screenshots](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/screenshots) or simply watch the video above to see the app in action!
+
+<img align="left" width="360" height="640" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/loading.png">
+
+
+
 
 # Purpose:
 - I undertook this project for a number of reasons. Primarily, I have been trying to learn Dart and Flutter for a while and such a build seemed like a good way to test out my knowledge so far as well as learn through a challenging project. I was able to construct a relatively clean and scalable architecture that form the core principles of the build and I could code efficiently, bearing in mind readability and effectiveness. Through the build, I was able to understand how to better manage state in Flutter using the BLOC pattern and how to combine StatefulWidgets with the aforementioned approach in order to achieve a balance of simplicity and use. I could work with many external packages such as rxdart, sqflite as well as leverage the OOP and typed nature of dart to arrive at work that was of a decent quality.
