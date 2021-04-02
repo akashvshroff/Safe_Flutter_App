@@ -1,7 +1,5 @@
 # Overview:
 
-//insert video link here
-
 - A simple, elegant password manager application built using Flutter. 
 
 ## Features:
@@ -14,7 +12,7 @@
 ## Screenshots:
 - Here are some of the key shots of the app, you could observe the rest in the [screenshots](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/screenshots) or simply watch the video above to see the app in action!
 
-<img align="left" width="360" height="640" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/loading.png">
+<img width="180" height="380" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/loading.png">
 
 
 
