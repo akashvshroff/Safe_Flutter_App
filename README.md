@@ -12,9 +12,12 @@
 ## Screenshots:
 - Here are some of the key shots of the app, you could observe the rest in the [screenshots](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/screenshots) or simply watch the video above to see the app in action!
 
-<img width="180" height="380" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/loading.png">
-
-
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/loading.png">
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/master_password.png">
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/verify_success.png">
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/details_list.png">
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/edit.png">
+<img width="225" height="475" src="https://github.com/akashvshroff/Safe_Flutter_App/blob/master/screenshots/generate_memorizable.png">
 
 
 # Purpose:
