@@ -51,3 +51,6 @@
 
 ## Cryptography:
 - The cryptography in this project is built around one fundamental caveat *Any hacker has complete knowledge which is equal to that of the developer of the application*. 
+- Bearing in mind this principle, the build employs a **master password** that is assigned to the user on the first time they access the app. This password is created using the [Diceware technique](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/crypto_resources/dice_ware.dart) and is then [hashed](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/crypto_resources/hash_password.dart) using SHA256 and stored in the database. 
+- Going forward, the user has to enter the password which is hashed and then compared against the master hash stored in the database. If it is the same, the user is granted access to the safe and the master password entered by them is temporarily stored for the duration of their time in the application. 
+- This master password is integral as it is used to [encrypt](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/crypto_resources/encrypt_password.dart) any password and forms the key along with the service and username that the user has entered. Therefore the encryptedPassword is stored in the database and the master password is required again to decrypt the password. 
