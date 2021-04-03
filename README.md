@@ -37,7 +37,7 @@
 - The [repository](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/resources/repository.dart) is the crux of the project and ties together the cryptography portion - all housed in the [crypto_resources dir](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/lib/src/crypto_resources) - and the [database provider](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/resources/safe_db_provider.dart). 
 - For the most part, data moves in the build in the form of a DetailModel instance. This model reflects password data that is stored in the database and has properties of id, service, username and encryptedPassword. 
 - The repository is responsible for calling upon all the cryptographic functions as and when required, be it hashing the master password, decrypting a password to display to the user or encrypting a password to store in the database. It also houses methods that conduct CRUD operations on the database by leveraging methods of the database provider. 
-- This class is not ever called upon by the UI directly, and is insulated by the BLOC. 
+- This class is never called upon by the UI directly, and is insulated by the BLOC. 
 
 ### BLOC:
 - The [BLOC Class](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/blocs/bloc.dart) handles the majority of data flow within the build and has a number of StreamControllers that are subscribed to by UI elements using StreamBuilders and this way changing data is reflected in the code. 
@@ -45,9 +45,9 @@
 - A deeper analysis of the Bloc class as well as a quick glance at all the comments that litter the code will be more than explanatory as to how each StreamController works. 
 
 ### onGenerateRoute:
-- The [onGenerateRoute callback](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/app.dart) is reposible for the navigation in the project and it does so by parsing the route names that it called using. 
+- The [onGenerateRoute callback](https://github.com/akashvshroff/Safe_Flutter_App/blob/master/lib/src/app.dart) is reponsible for the navigation in the project and it does so by parsing the route names that it called using. 
 - These names correspond to the different [screens](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/lib/src/screens) in the project and some of them even contain additional data such as the id of the DetailModel. 
 - The onGenerateCallback also accesses the BLOC through its Provider and does so in order to call methods that either add relevant data to StreamControllers or reset the stream in order to reset the associated UI element. 
 
 ## Cryptography:
-- 
+- The cryptography in this project is built around one fundamental caveat *Any hacker has complete knowledge which is equal to that of the developer of the application*. 
