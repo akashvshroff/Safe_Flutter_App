@@ -93,11 +93,17 @@ class _DetailsListState extends State<DetailsList> {
         }
         final List<DetailModel> details =
             snapshot.data != null ? snapshot.data : [];
+        details.add(null);
         return RefreshIndicator(
           child: ListView.builder(
             itemCount: details.length,
             itemBuilder: (context, index) {
-              if (details[index].service.toLowerCase().contains(queryString) ||
+              if (details[index] == null) {
+                return Container(height: 100.0, width: 0.0);
+              } else if (details[index]
+                      .service
+                      .toLowerCase()
+                      .contains(queryString) ||
                   queryString == '') {
                 return DetailTile(detail: details[index]);
               } else {
