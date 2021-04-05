@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.safe">
    <application
-        android:label="safe"
+        android:label="safe."
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

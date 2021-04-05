@@ -43,8 +43,8 @@ android {
         applicationId "com.example.safe"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 1
+        versionName "1.0"
     }
 
     signingConfigs {
