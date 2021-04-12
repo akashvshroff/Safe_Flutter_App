@@ -29,13 +29,19 @@ class Bloc {
   //getters to sink
   Function(DetailModel) get detailFocusSink => _showDetailFocus.sink.add;
   Function(String) get generatePasswordSink => _generatePassword.sink.add;
+  Function(String) get masterPasswordSink => _masterPassword.sink.add;
 
   //Master Password functions
 
   void fetchMasterPassword() async {
     //add master password to master stream
     final masterPassword = await _repository.createMasterPassword();
-    _masterPassword.sink.add(masterPassword);
+    masterPasswordSink(masterPassword);
+  }
+
+  String fetchExistingMasterPassword() {
+    //fetch existing master password and add to stream
+    return _repository.masterPassword;
   }
 
   Future<String> getMasterPasswordHash() async {
