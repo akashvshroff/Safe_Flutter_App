@@ -34,6 +34,21 @@ class Repository {
     }
   }
 
+  Future<void> updateMasterPassword(String newPassword) async {
+    //updates the master password stored in the db
+    List<DetailModel> details = await fetchAllDetails();
+    List<String> decryptedPasswords = details.map((detail) {
+      return getDecryptedPassword(detail);
+    }).toList();
+
+    _master = newPassword;
+    for (int i = 0; i < details.length; i++) {
+      updateDetail(decryptedPasswords[i], details[i]);
+    }
+    String masterHash = getHash(_master);
+    safeDbProvider.addMasterHash(masterHash);
+  }
+
   Future<List<DetailModel>> fetchAllDetails() async {
     //fetch all the details from the db
     return await safeDbProvider.fetchAllDetails();
