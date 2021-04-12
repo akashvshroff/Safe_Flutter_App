@@ -10,6 +10,8 @@ class Repository {
   final safeDbProvider = SafeDbProvider();
   String _master;
 
+  String get masterPassword => _master;
+
   Future<String> getMasterHash() async {
     //returns master hash else null if not master
     return await safeDbProvider.fetchMasterHash();
