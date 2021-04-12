@@ -92,13 +92,23 @@ class MasterPassword extends StatelessWidget {
           style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
         ),
       ),
+      SizedBox(
+        height: 5.0,
+      ),
+      ListTile(
+        leading: Icon(Icons.fiber_manual_record),
+        title: Text(
+          'you can edit this password from the settings page.',
+          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+        ),
+      ),
       Spacer(),
       Center(
         child: IconButton(
             color: Colors.blue,
             icon: Icon(
               Icons.check,
-              size: 40.0,
+              size: 30.0,
             ),
             onPressed: () {
               changePage(context);
