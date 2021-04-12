@@ -33,7 +33,7 @@ class MasterPassword extends StatelessWidget {
   }
 
   void changePage(context) {
-    Navigator.pushNamed(context, '/verify');
+    Navigator.pushReplacementNamed(context, '/verify');
   }
 
   List<Widget> getChildren(String password, BuildContext context) {
