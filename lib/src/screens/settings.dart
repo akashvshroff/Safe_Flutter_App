@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../blocs/provider.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:local_auth/error_codes.dart' as auth_error;
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -110,18 +111,17 @@ class _SettingsPageState extends State<SettingsPage> {
               if (await _localAuth.isDeviceSupported()) {
                 bool authenticateResult = await _localAuth.authenticate(
                     localizedReason:
-                        'please verify your identity to edit the master password.');
+                        'Please verify your identity to edit the master password.');
                 if (authenticateResult) {
                   showSnackBar(
                       'success, you can now edit the master password.');
-                  setState(() {
-                    editingEnabled = authenticateResult;
-                  });
                 } else {
                   showSnackBar('error, verification failed.');
                 }
+                setState(() {
+                  editingEnabled = authenticateResult;
+                });
               } else {
-                //show dialog to enable editing
                 showAlertDialog(
                     'info',
                     'add a lock screen password or biometric security to your phone to edit your master password.',
