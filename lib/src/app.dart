@@ -8,6 +8,7 @@ import 'screens/details_list.dart';
 import 'screens/detail_focus.dart';
 import 'screens/generate_password.dart';
 import 'screens/detail_edit.dart';
+import 'screens/settings.dart';
 
 class App extends StatelessWidget {
   @override
@@ -81,6 +82,10 @@ class App extends StatelessWidget {
           pageTitle: 'edit.',
           detailId: detailId,
         );
+      });
+    } else if (routeName.contains('settings')) {
+      return MaterialPageRoute(builder: (context) {
+        return SettingsPage();
       });
     }
   }
