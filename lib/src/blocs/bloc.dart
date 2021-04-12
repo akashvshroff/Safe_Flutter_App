@@ -39,11 +39,6 @@ class Bloc {
     masterPasswordSink(masterPassword);
   }
 
-  String fetchExistingMasterPassword() {
-    //fetch existing master password and add to stream
-    return _repository.masterPassword;
-  }
-
   Future<String> getMasterPasswordHash() async {
     //get master password hash if any
     return await _repository.getMasterHash();
@@ -57,6 +52,15 @@ class Bloc {
     } else {
       _verifyMasterPassword.sink.addError('Wrong password');
     }
+  }
+
+  String fetchExistingMasterPassword() {
+    //fetch existing master password and add to stream
+    return _repository.masterPassword;
+  }
+
+  Future<void> updateMasterPassword(String newPassword) {
+    return _repository.updateMasterPassword(newPassword);
   }
 
   //Crypto functions
