@@ -17,6 +17,12 @@ class _DetailsListState extends State<DetailsList> {
     final bloc = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.settings, color: Colors.white),
+          onPressed: () {
+            Navigator.pushNamed(context, '/settings');
+          },
+        ),
         automaticallyImplyLeading: false,
         title: Text(
           'safe.',
