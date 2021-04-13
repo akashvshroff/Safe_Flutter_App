@@ -53,7 +53,9 @@ class _VerifyMasterState extends State<VerifyMaster> {
             child: TextField(
               controller: entryController,
               style: TextStyle(fontSize: 20.0),
-              decoration: InputDecoration(hintText: 'enter master password. '),
+              decoration: InputDecoration(
+                  hintText: 'enter master password. ',
+                  contentPadding: EdgeInsets.only(left: 6.0)),
             ),
           ),
           IconButton(

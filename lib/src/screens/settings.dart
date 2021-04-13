@@ -110,6 +110,9 @@ class _SettingsPageState extends State<SettingsPage> {
               maxLines: null,
               controller: _passwordController,
               style: TextStyle(fontSize: 20.0),
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(left: 6.0),
+              ),
             ),
           ),
           IconButton(
