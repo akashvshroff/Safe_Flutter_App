@@ -18,6 +18,8 @@ class Bloc {
   final _showDetailFocus = PublishSubject<DetailModel>();
   //pass a generated password, either diceware or random
   final _generatePassword = PublishSubject<String>();
+  //update master process status - true if complete
+  final _masterUpdateStatus = PublishSubject<bool>();
 
   //getters to Stream
   Stream<String> get masterPasswordStream => _masterPassword.stream;
@@ -25,11 +27,13 @@ class Bloc {
   Stream<List<DetailModel>> get details => _showDetails.stream;
   Stream<DetailModel> get detailFocus => _showDetailFocus.stream;
   Stream<String> get generatePasswordStream => _generatePassword.stream;
+  Stream<bool> get masterUpdateStatus => _masterUpdateStatus.stream;
 
   //getters to sink
   Function(DetailModel) get detailFocusSink => _showDetailFocus.sink.add;
   Function(String) get generatePasswordSink => _generatePassword.sink.add;
   Function(String) get masterPasswordSink => _masterPassword.sink.add;
+  Function(bool) get masterUpdateSink => _masterUpdateStatus.sink.add;
 
   //Master Password functions
 
@@ -59,8 +63,10 @@ class Bloc {
     return _repository.masterPassword;
   }
 
-  Future<void> updateMasterPassword(String newPassword) {
-    return _repository.updateMasterPassword(newPassword);
+  Future<void> updateMasterPassword(String newPassword) async {
+    //updates the master password and adds to the sink if the process is successful
+    await _repository.updateMasterPassword(newPassword);
+    masterUpdateSink(true);
   }
 
   //Crypto functions
