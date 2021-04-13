@@ -64,8 +64,15 @@ class _SettingsPageState extends State<SettingsPage> {
           IconButton(
             iconSize: 50.0,
             icon: Icon(Icons.done, color: Colors.green),
-            onPressed: () {
-              //show dialog
+            onPressed: () async {
+              var shouldContinue = await showAlertDialog(
+                  'warning.',
+                  'editing the master password is an intensive process and will take a few minutes to complete. please do not press the back button during the process.',
+                  'cancel',
+                  'continue');
+              if (shouldContinue) {
+                // navigate and call upon bloc to change master
+              }
             },
           ),
         ],
@@ -107,26 +114,34 @@ class _SettingsPageState extends State<SettingsPage> {
           IconButton(
             icon: Icon(Icons.edit, color: Colors.blue),
             onPressed: () async {
-              //authenticate and then change enabled
-              if (await _localAuth.isDeviceSupported()) {
-                bool authenticateResult = await _localAuth.authenticate(
+              // authenticate and then change enabled
+              try {
+                if (await _localAuth.isDeviceSupported()) {
+                  bool authenticateResult = await _localAuth.authenticate(
                     localizedReason:
-                        'Please verify your identity to edit the master password.');
-                if (authenticateResult) {
-                  showSnackBar(
-                      'success, you can now edit the master password.');
+                        'Please verify your identity to edit the Master Password.',
+                    useErrorDialogs: true,
+                    stickyAuth: true,
+                  );
+                  if (authenticateResult) {
+                    showSnackBar(
+                        'success, you can now edit the master password.');
+                  } else {
+                    showSnackBar('error, verification failed.');
+                  }
+                  setState(() {
+                    editingEnabled = authenticateResult;
+                  });
                 } else {
-                  showSnackBar('error, verification failed.');
+                  showAlertDialog(
+                      'info.',
+                      'add a lock screen password or biometric security to your phone to edit your master password.',
+                      ' ',
+                      'ok');
                 }
-                setState(() {
-                  editingEnabled = authenticateResult;
-                });
-              } else {
-                showAlertDialog(
-                    'info',
-                    'add a lock screen password or biometric security to your phone to edit your master password.',
-                    ' ',
-                    'ok');
+              } on PlatformException catch (e) {
+                showAlertDialog('error.',
+                    'something went wrong, please try again later.', ' ', 'ok');
               }
             },
           )
@@ -135,7 +150,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Future<Widget> showAlertDialog(
+  Future<bool> showAlertDialog(
       String title, String content, String button1, String button2) async {
     AlertDialog alert = AlertDialog(
       title: Text(
@@ -149,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
       actions: [
         TextButton(
             onPressed: () {
-              Navigator.of(context).pop(null);
+              Navigator.of(context).pop(false);
             },
             child: Text(button1,
                 style:
@@ -166,10 +181,11 @@ class _SettingsPageState extends State<SettingsPage> {
       ],
     );
 
-    return await showDialog(
+    bool value = await showDialog(
         context: context,
         builder: (BuildContext context) {
           return alert;
         });
+    return value;
   }
 }
