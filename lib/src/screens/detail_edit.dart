@@ -169,6 +169,7 @@ class _DetailEditState extends State<DetailEdit> {
   }
 
   Future<void> generatePassword() async {
+    FocusScope.of(context).unfocus();
     var newPassword = await Navigator.pushNamed(context, '/generate');
     if (newPassword != null) {
       passwordController.text = newPassword;
