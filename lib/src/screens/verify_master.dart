@@ -8,6 +8,8 @@ class VerifyMaster extends StatefulWidget {
 
 class _VerifyMasterState extends State<VerifyMaster> {
   final entryController = TextEditingController();
+  int count = 0;
+  bool locked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +62,15 @@ class _VerifyMasterState extends State<VerifyMaster> {
               color: Colors.green,
             ),
             onPressed: () {
-              bloc.checkMasterPassword(entryController.text.toLowerCase());
               FocusScope.of(context).unfocus();
+              count++;
+              if (count >= 3) {
+                setState(() {
+                  locked = true;
+                });
+              } else {
+                bloc.checkMasterPassword(entryController.text.toLowerCase());
+              }
             },
           )
         ],
@@ -70,6 +79,12 @@ class _VerifyMasterState extends State<VerifyMaster> {
   }
 
   SizedBox getErrorField(Bloc bloc) {
+    if (locked) {
+      return SizedBox(
+        height: 100.0,
+        child: getLocked(),
+      );
+    }
     return SizedBox(
       height: 100.0,
       child: StreamBuilder(
@@ -90,12 +105,32 @@ class _VerifyMasterState extends State<VerifyMaster> {
     );
   }
 
+  Row getLocked() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          'too many attempts.\nplease try again later.',
+          style: TextStyle(
+            fontSize: 24.0,
+            color: Colors.red,
+          ),
+        ),
+        Icon(
+          Icons.error_outline,
+          color: Colors.white,
+          size: 40.0,
+        ),
+      ],
+    );
+  }
+
   Row getIncorrect() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'incorrect password.\nplease try again.',
+          'incorrect password.\n${3 - count} attempts remain.',
           style: TextStyle(
             fontSize: 24.0,
             color: Colors.red,
