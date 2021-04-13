@@ -110,6 +110,9 @@ class Repository {
   String getDecryptedPassword(DetailModel detail) {
     //get the original password from encrypted using master and AES
     String key = this._master + detail.service + detail.username;
+    if (key.length <= 32) {
+      key += 'x' * 32;
+    }
     key = key.substring(0, 32);
     return decryptPassword(detail.encryptedPassword, key);
   }
