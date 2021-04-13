@@ -9,6 +9,7 @@ import 'screens/detail_focus.dart';
 import 'screens/generate_password.dart';
 import 'screens/detail_edit.dart';
 import 'screens/settings.dart';
+import 'screens/update_master.dart';
 
 class App extends StatelessWidget {
   @override
@@ -86,6 +87,14 @@ class App extends StatelessWidget {
     } else if (routeName.contains('settings')) {
       return MaterialPageRoute(builder: (context) {
         return SettingsPage();
+      });
+    } else if (routeName.contains('update')) {
+      return MaterialPageRoute(builder: (context) {
+        final bloc = Provider.of(context);
+        bloc.masterUpdateSink(null);
+        String newPassword = routeName.replaceAll('/update/', '');
+        bloc.updateMasterPassword(newPassword);
+        return UpdateMaster();
       });
     }
   }
