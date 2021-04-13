@@ -36,6 +36,7 @@ class _DetailsListState extends State<DetailsList> {
                 queryString = '';
                 queryController.text = '';
               });
+              bloc.fetchDetails();
             },
           ),
         ],
