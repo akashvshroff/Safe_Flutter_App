@@ -126,5 +126,6 @@ class Bloc {
     _showDetails.close();
     _showDetailFocus.close();
     _generatePassword.close();
+    _masterUpdateStatus.close();
   }
 }
