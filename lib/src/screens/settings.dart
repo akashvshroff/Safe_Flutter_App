@@ -67,11 +67,13 @@ class _SettingsPageState extends State<SettingsPage> {
             onPressed: () async {
               var shouldContinue = await showAlertDialog(
                   'warning.',
-                  'editing the master password is an intensive process and will take a few minutes to complete. please do not press the back button during the process.',
+                  'editing the master password is an intensive process and could take a few minutes to complete.\n\nplease do not press the back button during the process.',
                   'cancel',
                   'continue');
               if (shouldContinue) {
                 // navigate and call upon bloc to change master
+                String newPassword = _passwordController.text;
+                Navigator.pushReplacementNamed(context, '/update/$newPassword');
               }
             },
           ),
