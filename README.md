@@ -5,6 +5,7 @@
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/8H64WwyUtRE/0.jpg)](https://www.youtube.com/watch?v=8H64WwyUtRE)
 
 - A simple, elegant password manager application built using Flutter. 
+- The [play store link](https://play.google.com/store/apps/details?id=safe.basic.build) for the application. 
 
 ## Features:
 - A 'zero-knowledge' system with a master password.
@@ -12,6 +13,11 @@
 - Secure, memorizable passwords using [Diceware](https://theworld.com/~reinhold/diceware.html) and the [EFF Wordlist](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases).
 - SHA256 hashing via the [dart crypto package](https://pub.dev/packages/crypto).
 - Local SQL storage with the [flutter SQFlite package](https://pub.dev/packages/sqflite).
+- Authentication (Biometric and system, i.e pin, pattern) via [local_auth](https://pub.dev/packages/local_auth).
+
+
+## Update:
+- The latest version **14-04-2021, version 3.0** now allows users to edit the master password and enter their own. It uses local_auth in order to verify their identity. 
 
 ## Screenshots:
 - Here are some of the key shots of the app, you could observe the rest in the [screenshots](https://github.com/akashvshroff/Safe_Flutter_App/tree/master/screenshots) or simply watch the video above to see the app in action!
